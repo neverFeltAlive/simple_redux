@@ -9,12 +9,12 @@ export enum Works{
 
 export type Work = {
     type: Works,
-    salary: number
+    salary: null | number
 }
 
 type PersonState = {
-    age: number
-    name: string
+    age: null | number
+    name: null | string
     work: null | Work
 }
 
@@ -32,16 +32,16 @@ export const personSlice = createSlice({
     initialState,
     reducers: {
         incrementByAmount: (state, action: PayloadAction<number>) => {
-            state.age = state.age + action.payload;
+            state.age = (state.age ?? 0) + action.payload;
         },
         decrementByAmount: (state, action: PayloadAction<number>) => {
-            state.age = state.age - action.payload;
+            state.age = (state.age ?? 0) - action.payload;
         },
         increment: (state) => {
-            state.age = state.age + 1;
+            state.age = (state.age ?? 0) + 1;
         },
         decrement: (state) => {
-            state.age = state.age - 1;
+            state.age = (state.age ?? 0) - 1;
         },
         reset: (state) => {
             state.age = 0;

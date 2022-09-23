@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useAppDispatch} from "../hooks/redux-hooks";
 import {incrementByAmount, decrementByAmount, increment, decrement} from "../store/slices/personSlice";
+import {Title, Input, Button, Form} from "./UI";
 
 /**
  * Component used to edit person's age value
@@ -8,7 +9,7 @@ import {incrementByAmount, decrementByAmount, increment, decrement} from "../sto
  */
 const Age = (): JSX.Element => {
     const dispatch = useAppDispatch();
-    const [amount, setAmount] = useState(10);
+    const [amount, setAmount] = useState<null | number>(10);
 
     /**
      * Handles change of age input
@@ -16,17 +17,30 @@ const Age = (): JSX.Element => {
      */
     const handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
         event.preventDefault();
-        setAmount(Number(event.target.value));
+        setAmount(event.target.value ? +event.target.value : null);
     }
 
     return (
-        <form onSubmit={(e) => e.preventDefault()}>
-            <button onClick={(e) => dispatch(increment())}>Increment</button>
-            <button onClick={(e) => dispatch(decrement())}>Decrement</button>
-            <input type="number" value={amount} onChange={handleChange}/>
-            <button onClick={(e) => dispatch(incrementByAmount(amount))}>Add</button>
-            <button onClick={(e) => dispatch(decrementByAmount(amount))}>Subtract</button>
-        </form>
+        <>
+            <Title>Age:</Title>
+            <Form onSubmit={(e) => e.preventDefault()}>
+                <div className="flex justify-between align-middle px-5 mb-5">
+                    <Button onClick={(e) => dispatch(increment())}>Increment</Button>
+                    <Button onClick={(e) => dispatch(decrement())}>Decrement</Button>
+                </div>
+                <div className="flex justify-between align-middle px-5 mb-5">
+                    <Input
+                        type="number"
+                        value={amount ?? ""}
+                        onChange={handleChange}
+                    />
+                    <div className="p-4 w-[30%]">
+                        <Button onClick={(e) => dispatch(incrementByAmount(amount ?? 0))}>Add</Button>
+                        <Button onClick={(e) => dispatch(decrementByAmount(amount ?? 0))}>Subtract</Button>
+                    </div>
+                </div>
+            </Form>
+        </>
     );
 };
 

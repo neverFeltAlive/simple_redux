@@ -3,10 +3,10 @@ import Edit from "./components/Edit";
 
 function App() {
     return (
-        <div>
-            <Person/>
+        <main className="min-h-screen min-w-screen flex flex-col justify-evenly items-center container mx-auto lg:flex-row">
             <Edit/>
-        </div>
+            <Person/>
+        </main>
     );
 }
 

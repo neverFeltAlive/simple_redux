@@ -10,9 +10,9 @@ import Reset from "./Reset";
  */
 const Edit = (): JSX.Element => {
     return (
-        <div>
-            <Age/>
+        <div className="bg-blue-200 mx-auto py-5 px-8 rounded-xl h-fit w-[400px]">
             <Name/>
+            <Age/>
             <Work/>
             <Reset/>
         </div>

@@ -3,6 +3,7 @@ import {useAppSelector} from "../hooks/redux-hooks";
 import {changeWork, selectWork, Work as WorkType, Works} from "../store/slices/personSlice";
 import {workDict} from "../utils/workDict";
 import {useDispatch} from "react-redux";
+import {Button, Form, Input, Title} from "./UI";
 
 /**
  * Component used to edit work values of person
@@ -29,7 +30,7 @@ const Work = (): JSX.Element => {
         setValues(prevState => {
             return {
                 ...prevState,
-                type: Array.from(workDict.keys())[Number(event.target.value)]
+                type: Array.from(workDict.keys())[+event.target.value]
             }
         })
     }
@@ -44,17 +45,27 @@ const Work = (): JSX.Element => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <select onChange={handleSelectChange}>
-                {works.map((work, index) => {
-                    return (
-                        <option key={work} value={index} selected={index === 0}>{work}</option>
-                    )
-                })}
-            </select>
-            <input type="number" value={values.salary} onChange={(e) => setValues(prevState => {return {...prevState, salary: Number(e.target.value)}})}/>
-            <button type="submit">Submit</button>
-        </form>
+        <>
+            <Title>Work:</Title>
+            <Form onSubmit={handleSubmit}>
+                <select
+                    className="w-[100%] bg-transparent my-5"
+                    onChange={handleSelectChange}
+                >
+                    {works.map((work, index) => {
+                        return (
+                            <option key={work} value={index} selected={index === 0}>{work}</option>
+                        )
+                    })}
+                </select>
+                <Input
+                    type="number"
+                    value={values.salary ? +values.salary : 0}
+                    onChange={(e:React.ChangeEvent<HTMLInputElement>) => setValues(prevState => {return {...prevState, salary: +e.target.value}})}
+                />
+                <Button>Submit</Button>
+            </Form>
+        </>
     );
 };
 
