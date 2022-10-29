@@ -2,6 +2,11 @@
 
 This is a small React & Redux component styled using Tailwind CSS
 
+## Tech stack
+
+`React`
+`TypeScript`
+
 ## Functionality
 
 In this app you can manipulate data stored in Redux store and see how your changes affect it.
