@@ -6,6 +6,7 @@ This is a small React & Redux component styled using Tailwind CSS
 
 `React`
 `TypeScript`
+`Redux`
 
 ## Functionality
 
